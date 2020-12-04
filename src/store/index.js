@@ -1,5 +1,4 @@
 /* eslint-disable */
-import React from "react";
 import { applyMiddleware, createStore, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
 import Reducers from "./ducks";
