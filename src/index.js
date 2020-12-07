@@ -1,27 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+import { Provider } from "react-redux";
+import { store } from "./store";
+
 import Login from "./containers/Login";
 
+const componenteRaiz = document.getElementById("root");
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <Login />
-  </React.StrictMode>,
-  document.getElementById("root")
+  </Provider>,
+  componenteRaiz
 );
-
-// import React from "react";
-// import ReactDOM from "react-dom";
-
-// import { Provider } from "react-redux";
-// import { storeCreator } from "./store";
-
-// import App from "./App";
-
-// const componenteRaiz = document.getElementById("root");
-
-// ReactDOM.render(
-//   <Provider store={storeCreator}>
-//     <App />
-//   </Provider>,
-//   componenteRaiz
-// );

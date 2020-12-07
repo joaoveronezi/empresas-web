@@ -21,11 +21,15 @@ const authRequest = () => ({
   authRequest: REQUEST_PENDING,
 });
 
-const authSuccess = (state, { payload }) => ({
-  ...state,
-  token: payload,
-  authSuccess: REQUEST_SUCCESS,
-});
+const authSuccess = (state, { payload }) => {
+  console.log(payload);
+
+  return {
+    ...state,
+    token: payload,
+    authSuccess: REQUEST_SUCCESS,
+  };
+};
 
 const authFailure = (state, { payload }) => ({
   ...state,
