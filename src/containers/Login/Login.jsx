@@ -15,7 +15,6 @@ import {
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
-
   const dispatch = useDispatch();
 
   const changeForm = (event) => {
@@ -28,6 +27,7 @@ const Login = () => {
     dispatch(AuthActions.authRequest(form));
     setForm({ email: "", password: "" });
   };
+
   return (
     <Wrapper>
       <ImgWrapper>

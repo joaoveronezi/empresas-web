@@ -1,8 +1,10 @@
 import { createActions, createReducer } from "reduxsauce";
+// import { isAuthenticated, getAuthClaims } from "helpers/auth";
 import {
   REQUEST_PENDING,
   REQUEST_SUCCESS,
   REQUEST_FAILURE,
+  REQUEST_NOT_STARTED,
 } from "utils/constants";
 
 export const { Types, Creators } = createActions({
@@ -12,8 +14,9 @@ export const { Types, Creators } = createActions({
 });
 
 const INITIAL_STATE = {
+  isAuthenticated: JSON.parse(localStorage.getItem("token")) !== null,
   token: localStorage.getItem("token"),
-  error: null,
+  authRequest: REQUEST_NOT_STARTED,
 };
 
 const authRequest = () => ({
@@ -27,6 +30,7 @@ const authSuccess = (state, { payload }) => {
   return {
     ...state,
     token: payload,
+    isAuthenticated: !!payload,
     authSuccess: REQUEST_SUCCESS,
   };
 };
