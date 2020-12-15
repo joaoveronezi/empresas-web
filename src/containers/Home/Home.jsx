@@ -24,9 +24,7 @@ const Home = () => {
   const LogoComponent = () => (
     <>
       <Logo src={LogoIoasys} alt="Logo ioasys branco" />
-      <a href="/#" onClick={handleClick}>
-        <SearchIcon src={Icon} />
-      </a>
+      <SearchIcon src={Icon} onClick={handleClick} />
     </>
   );
   const SearchBarComponent = () => (

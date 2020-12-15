@@ -40,6 +40,7 @@ export const Formulary = styled.div`
   width: 100%;
   height: auto;
   input {
+    background: #ebe9d7;
     padding: 12px 20px;
     width: 20rem;
     box-sizing: border-box;
