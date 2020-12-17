@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Logo from "assets/images/logo.png";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { ROUTES } from "utils/constants";
 import emailIcon from "assets/icons/ic-email.png";
 import { Creators as AuthActions } from "store/ducks/auth";
 import lockerIcon from "assets/icons/ic-cadeado.png";
-import { useDispatch } from "react-redux";
+
 import {
   Wrapper,
   ImgWrapper,
@@ -19,16 +20,21 @@ const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
   const history = useHistory();
+
   const changeForm = (event) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     dispatch(AuthActions.authRequest(form));
     setForm({ email: "", password: "" });
-    history.push(ROUTES.home.path);
+
+    setTimeout(() => {
+      history.push(ROUTES.home.path);
+    }, 1000);
   };
 
   return (

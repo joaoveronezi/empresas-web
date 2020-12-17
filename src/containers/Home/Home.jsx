@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LogoIoasys from "assets/images/logo-branco.png";
-
+import { useDispatch } from "react-redux";
+import { Creators as EnterprisesActions } from "store/ducks/enterprise";
 import Icon from "assets/icons/ic-busca.png";
 import CloseIcon from "assets/icons/ic-close.png";
 import {
@@ -17,7 +18,11 @@ import {
 
 const Home = () => {
   const [showSearchbar, setShowSearchBar] = useState(false);
+  const dispatch = useDispatch();
 
+  const Handle = () => {
+    dispatch(EnterprisesActions.enterprisesRequest());
+  };
   const handleClick = () => {
     setShowSearchBar(!showSearchbar);
   };
@@ -50,6 +55,9 @@ const Home = () => {
       <NavBar>{showSearchbar ? SearchBarComponent() : LogoComponent()}</NavBar>
       <Content>
         <Title>Clique na busca para iniciar</Title>
+        <button type="button" onClick={Handle}>
+          CLICK ME
+        </button>
       </Content>
     </Container>
   );
