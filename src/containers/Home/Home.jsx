@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LogoIoasys from "assets/images/logo-branco.png";
 import { useDispatch } from "react-redux";
 import { Creators as EnterprisesActions } from "store/ducks/enterprise";
@@ -21,11 +21,17 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const Handle = () => {
-    dispatch(EnterprisesActions.enterprisesRequest());
+    dispatch(EnterprisesActions.getEnterprises());
   };
+
+  useEffect(() => {
+    dispatch(EnterprisesActions.getEnterprises());
+  }, []);
+
   const handleClick = () => {
     setShowSearchBar(!showSearchbar);
   };
+
   const LogoComponent = () => (
     <>
       <Logo src={LogoIoasys} alt="Logo ioasys branco" />

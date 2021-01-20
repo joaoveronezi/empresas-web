@@ -15,7 +15,7 @@ export const { Types, Creators } = createActions({
 
 const INITIAL_STATE = {
   isAuthenticated: JSON.parse(localStorage.getItem("token")) !== null,
-  token: localStorage.getItem("token"),
+  profileData: {},
   authRequest: REQUEST_NOT_STARTED,
 };
 
@@ -25,20 +25,20 @@ const authRequest = () => ({
 });
 
 const authSuccess = (state, { payload }) => {
-  console.log(payload);
+  console.log("PAYLOAD AUTH ->", payload);
 
   return {
     ...state,
-    token: payload,
+    profileData: payload,
     isAuthenticated: !!payload,
-    authSuccess: REQUEST_SUCCESS,
+    authRequest: REQUEST_SUCCESS,
   };
 };
 
 const authFailure = (state, { payload }) => ({
   ...state,
   error: payload,
-  authFailure: REQUEST_FAILURE,
+  authRequest: REQUEST_FAILURE,
 });
 
 export default createReducer(INITIAL_STATE, {

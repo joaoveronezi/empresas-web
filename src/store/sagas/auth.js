@@ -3,16 +3,17 @@ import api from "services/api";
 import { POST } from "utils/constants/verbs";
 import { AUTH_USER } from "utils/constants";
 import { Types as AuthTypes, Creators as AuthActions } from "store/ducks/auth";
+import { LOCAL_STORAGE } from "services/auth";
 
-function* setToken(claims) {
-  yield call([localStorage, "setItem"], "token", JSON.stringify(claims));
+function* setToken(data) {
+  yield call([localStorage, "setItem"], LOCAL_STORAGE, JSON.stringify(data));
 }
 
 export function* authorize({ payload }) {
   try {
     const { email, password } = payload;
 
-    const { data } = yield api({
+    const resp = yield api({
       method: POST,
       url: AUTH_USER,
       data: {
@@ -20,9 +21,9 @@ export function* authorize({ payload }) {
         password,
       },
     });
-
-    yield setToken(data.investor.id);
-    yield put(AuthActions.authSuccess(data));
+    console.log(resp);
+    yield setToken(resp.headers);
+    yield put(AuthActions.authSuccess(resp.data));
   } catch (error) {
     yield put(AuthActions.authFailure(error));
   }
