@@ -8,9 +8,10 @@ import {
 } from "utils/constants";
 
 export const { Types, Creators } = createActions({
-  getEnterprises: null,
+  getEnterprises: ["name"],
   getEnterprisesSuccess: ["payload"],
   getEnterprisesFailure: ["error, payload"],
+  cleanState: null,
 });
 
 const INITIAL_STATE = {
@@ -18,17 +19,13 @@ const INITIAL_STATE = {
   fetchEnterprises: REQUEST_NOT_STARTED,
 };
 
-const getEnterprises = () => {
-  console.log("DUCK");
-
-  return {
-    ...INITIAL_STATE,
-    fetchEnterprises: REQUEST_PENDING,
-  };
-};
+const getEnterprises = () => ({
+  ...INITIAL_STATE,
+  fetchEnterprises: REQUEST_PENDING,
+});
 
 const getEnterprisesSuccess = (state, { payload }) => {
-  console.log("DUCK SUCCESS");
+  console.log("DUCK SUCCESS", payload);
   return {
     ...state,
     enterprises: payload,
@@ -45,9 +42,11 @@ const getEnterprisesFailure = (state, { error }) => {
     fetchEnterprises: REQUEST_FAILURE,
   };
 };
+const cleanState = () => ({ ...INITIAL_STATE });
 
 export default createReducer(INITIAL_STATE, {
   [Types.GET_ENTERPRISES]: getEnterprises,
   [Types.GET_ENTERPRISES_SUCCESS]: getEnterprisesSuccess,
   [Types.GET_ENTERPRISES_FAILURE]: getEnterprisesFailure,
+  [Types.CLEAN_STATE]: cleanState,
 });
